@@ -1,0 +1,30 @@
+--Node. js is a runtime environment for executing JavaScript on the server, while Express. js is a web application framework built on top of Node. js, providing higher-level abstractions for web development.
+
+
+--use bcrypt package to hash the users password --> passwords hashed and stored in database
+
+--A Mongoose model is a wrapper of the Mongoose schema. A Mongoose schema defines the document's properties, default values, types of data, validators, etc. In contrast, a Mongoose model provides an interface for the database to create, query, update, delete records, and so on.
+
+
+--folders:
+-controllers-> logic functions (to control routes)
+-routes-> all routes
+-models -> database models
+
+
+--Get and post
+-The GET method is used to request data from the server. It is typically used to:
+	•	Fetch resources (e.g., web pages, data in JSON format, images, etc.).
+	•	Send small amounts of data via the URL query string.
+  •	The data sent by the client is appended to the URL as query parameters (e.g., ?key=value).
+	•	Limited data size (depends on the URL length limit of the browser/server).
+-The POST method is used to send data to the server, typically to:
+	•	Submit forms.
+	•	Create or update resources on the server.
+	•	Handle large amounts of data (e.g., files, JSON payloads).
+  •	Data is sent in the request body, not appended to the URL.
+	•	No size limit (subject to server configuration).
+  To handle a POST request, you need to parse the incoming request body. This can be done using middleware (express.json())
+  
+  •	req.body: Contains the data sent by the client in the request body (parsed as JSON, URL-encoded data, etc., depending on middleware).
+	•	res: Used to send a response back to the client (e.g., status codes, messages, or created resources).
