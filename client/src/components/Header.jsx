@@ -1,6 +1,6 @@
 import { Navbar, TextInput, Button} from 'flowbite-react'
 import React from 'react'
-import { Link , useLocation} from 'react-router-dom'
+import { Link ,NavLink, useLocation} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {FaMoon} from 'react-icons/fa'
 
@@ -28,7 +28,7 @@ function Header() {
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch/>
       </Button>
-      <div className="flex flex-wrap gap-2 md:order-2 ">
+      <div className='flex flex-wrap gap-2 md:order-2 '>
         <Button className='w-12 h-10  sm:inline' color='gray' pill>
           <FaMoon /> 
         </Button>
@@ -40,18 +40,18 @@ function Header() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-          <Navbar.Link active={path==='/'} as={'div'}>
-            <Link to='/'>
+          <Navbar.Link as={'div'}>
+            <NavLink to="/" exact='true'   className='active'>
             Home
-            </Link>
+            </NavLink>
           </Navbar.Link>
-          <Navbar.Link active={path==='/about'} as={'div'}> {/* as={'div'} to avoid error(cannot have a link inside a link) */}
-            <Link to='/about'>
+          <Navbar.Link  as={'div'}> {/* as={'div'} to avoid error(cannot have a link inside a link) */}
+            <NavLink to='/about' className='active'> 
             About
-            </Link>
+            </NavLink>
           </Navbar.Link>
-          <Navbar.Link active={path==='/projects' } as={'div'}>
-            <Link to='/projects'>
+          <Navbar.Link  as={'div'}>
+            <Link to='/projects' className='active'>
             Projects
             </Link>
           </Navbar.Link>
