@@ -27,7 +27,9 @@ function SignUp() {
     
     try{
       setLoading(true);
-      set
+      
+
+      //fetch sending request to api using api endpoint and method beside optional parameters
       const res= await fetch('/api/auth/signup',{
         method: 'POST',
         headers: {

@@ -50,11 +50,6 @@ function Header() {
             About
             </NavLink>
           </Navbar.Link>
-          <Navbar.Link  as={'div'}>
-            <Link to='/projects' className='active'>
-            Projects
-            </Link>
-          </Navbar.Link>
           </Navbar.Collapse>
         </Navbar>
   )
