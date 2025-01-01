@@ -2,15 +2,23 @@ import { Button, Label, TextInput, Alert, Spinner } from 'flowbite-react'
 import React from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
+//to use redux actions in a functional component we use the useDispatch hook
+import { useDispatch, useSelector } from 'react-redux'
+import { signInStart, signInSucces, signInFailure } from '../redux/user/userSlice'
 import { set } from 'mongoose'
 
 
 function SignIn() {
   const [formData, setFormData] =useState({})
+  //to access the state in the store we use the useSelector hook 
+  const {loading, error: errorMessage} = useSelector((state) => state.user)
 
   //for error handling and loading
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [loading, setLoading] = useState(false)
+  //const [errorMessage, setErrorMessage] = useState(null)
+  //const [loading, setLoading] = useState(false)
+
+  //to change application's data an action is dispatched to the store
+  const dispatch = useDispatch();
   const navigate=useNavigate();
 
   const handleChange = (e) => {
@@ -18,17 +26,16 @@ function SignIn() {
    setFormData({...formData, [e.target.id]: e.target.value.trim()}) 
   }
   const handleSubmit = async(e) => {
-    e.preventDefault();
 
+    e.preventDefault();
     if(!formData.email || !formData.password){
-      return setErrorMessage('Please fill in all the fields.');
+      //return setErrorMessage('Please fill in all the fields.');
+      return dispatch(signInFailure('Please fill in all the fields.'));
     }
   
     
     try{
-      setLoading(true);
-      
-
+      dispatch(signInStart());
       //fetch sending request to api using api endpoint and method beside optional parameters
       const res= await fetch('/api/auth/signin',{
         method: 'POST',
@@ -37,19 +44,23 @@ function SignIn() {
         },
         body: JSON.stringify(formData) //convert the object to a string to be sent to the server 
       });
+
+      
       const data= await res.json();
       if(data.success ===false){
-        return setErrorMessage(data.message)
+        //return setErrorMessage(data.message)
+        dispatch(signInFailure(data.message));
       }
-      setLoading(false);
+      //setLoading(false);
       if(res.ok){
+        dispatch(signInSucces(data));
         navigate('/')
       }
     }
-    catch(err){
+    catch(error){
       //error in client side
-      setErrorMessage(err.message)
-      setLoading(false);
+      dispatch(signInFailure(error.message));
+      //setLoading(false);
     
     }
 
