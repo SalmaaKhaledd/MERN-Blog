@@ -44,7 +44,8 @@ export const signin= async (req, res,next) => {
     if(!validPassword){
       return next(errorHandler(400,"Invalid password"));
     }
-    const token=jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
+   const token = jwt.sign( { id: validUser._id, isAdmin: validUser.isAdmin }, process.env.JWT_SECRET );
+     
     //seperate the password from the rest of the user data
     const {password: pass, ...rest}=validUser._doc;
     //nobody can understand what the access token is (without the jwt secret key)except the server
@@ -94,7 +95,7 @@ export const google= async (req, res,next) => {
       });
       await newUser.save();
       const token = jwt.sign(
-        { id: newUser._id, isAdmin: newUser.isAdmin },
+        { id: user._id, isAdmin: user.isAdmin },
         process.env.JWT_SECRET
       );
       const { password, ...rest } = newUser._doc;
