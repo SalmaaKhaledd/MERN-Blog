@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 //to use 'import' not 'require' --> change the type in package.json to "module"
 import dotenv from 'dotenv'
 
@@ -20,7 +21,7 @@ mongoose
 
 const app=express();
 app.use(express.json()); //to allow the app to use json data in the body of the request (Parses JSON bodies in requests)
-
+app.use(cookieParser()); //to allow the app to use cookies in the request (extract cookies from browser)
 app.listen(3000,()=>{
     console.log('Server is running on port 3000!!');
 })
