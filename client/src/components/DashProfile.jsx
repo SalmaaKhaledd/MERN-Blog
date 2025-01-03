@@ -7,14 +7,14 @@ import { updateStart,updateSuccess, updateFailure,deleteUserStart,deleteUserSucc
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi'; 
 import {useNavigate} from 'react-router-dom'
-  
+import { Link } from 'react-router-dom';
 import { use } from 'react';
 import { set } from 'mongoose';
 
 
 
 export default function DashProfile() {
-  const {currentUser, error} = useSelector(state => state.user);
+  const {currentUser, error, loading} = useSelector(state => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl,setImageFileUrl] = useState(null);  
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
@@ -162,7 +162,20 @@ export default function DashProfile() {
           placeholder='email'
           defaultValue={currentUser.email} onChange={handleChange}/>
         <TextInput type='password' id='password' placeholder='password 'onChange={handleChange}/>
-        <Button type='submit' gradientDuoTone='purpleToPink' outline>Update</Button>
+        <Button type='submit' gradientDuoTone='purpleToBlue'  disabled={loading || imageFileUploading} >
+            {loading ? 'Loading...' : 'Update'}
+        </Button>
+        {currentUser.isAdmin && (
+          <Link to={'/create-post'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={()=>setShowModal(true)} className='cursor-pointer'>Delete Account</span>
