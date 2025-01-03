@@ -41,11 +41,11 @@ function Header() {
             type = 'text'
             placeholder = 'Search...'
             rightIcon={AiOutlineSearch}
-            className='hidden lg:inline' // hide on small screens
+            className=' hidden lg:block' // hide on small screens
         
         />
       </form>
-      <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+      <Button className='block lg:hidden w-12 h-10' color='gray' pill>
         <AiOutlineSearch/>
       </Button>
       <div className='flex flex-wrap gap-2 md:order-2 '>
