@@ -111,8 +111,8 @@ function Header() {
             </NavLink>
           </Navbar.Link>
           <Navbar.Link  as={'div'}> {/* as={'div'} to avoid error(cannot have a link inside a link) */}
-            <NavLink to='/about' className='active'> 
-            About
+            <NavLink to='/dashboard?tab=profile' className='active'> 
+           Profile
             </NavLink>
           </Navbar.Link>
           </Navbar.Collapse>

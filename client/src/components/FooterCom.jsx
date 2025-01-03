@@ -18,7 +18,6 @@ export default function FooterCom() {
           <Footer.LinkGroup className='mt-5'>
             <div className='w-full flex flex-wrap sm:flex-nowrap gap-4 sm:gap-6 justify-normal'>
             <Link to='/' className='text-sm'>Home</Link>
-            <Link to='/about' className='text-sm'>About</Link>
             <Link to='/sign-in' className='text-sm'>Sign In</Link>
             <Link to='/sign-up' className='text-sm'>Sign Up</Link>
             </div>
