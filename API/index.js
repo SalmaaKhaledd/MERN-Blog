@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import postRoutes from './routes/post.route.js';
 
 dotenv.config()
 
@@ -27,7 +28,7 @@ app.listen(3000,()=>{
 })
 app.use('/api/user',userRoutes);   //to use the get request from user.route.js
 app.use('/api/auth',authRoutes);  //to use the get request from auth.route.js
-
+app.use('/api/post',postRoutes);  //to use the get request from post.route.js
 //error handling global middleware
 app.use((err,req,res,next)=>{ 
   const statusCode=err.statusCode || 500;
