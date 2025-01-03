@@ -31,7 +31,7 @@ export const getposts = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.order === 'asc' ? 1 : -1;
-    
+
     //use post model to query the database
     const posts = await Post.find({
       //use object destructuring to conditionally include query parameters in the search
@@ -67,6 +67,18 @@ export const getposts = async (req, res, next) => {
       totalPosts,
       lastMonthPosts,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deletepost = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    return next(errorHandler(403, 'You are not allowed to delete this post'));
+  }
+  try {
+    await Post.findByIdAndDelete(req.params.postId);
+    res.status(200).json('The post has been deleted');
   } catch (error) {
     next(error);
   }

@@ -190,7 +190,7 @@ export default function DashProfile() {
       {
       error && (<Alert color='failure' className='mt-5'>{error}</Alert>)
       }
-      <Modal show={showModal} onClose={()=>setShowModal(false)} popup size='md'>
+      <Modal show={showModal} onClose={()=>setShowModal(false)} popup size='md' className=" bg-transparent justify-center">
         <Modal.Header />
         <Modal.Body>
           <div className='text-center'>
