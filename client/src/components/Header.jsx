@@ -2,7 +2,6 @@ import { Navbar, TextInput, Button, Dropdown, Avatar} from 'flowbite-react'
 import React from 'react'
 import { Link ,NavLink, useLocation} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
-import {FaMoon} from 'react-icons/fa'
 import {useSelector} from 'react-redux'
 import { signOutSuccess } from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux'
@@ -50,9 +49,6 @@ function Header() {
         <AiOutlineSearch/>
       </Button>
       <div className='flex flex-wrap gap-2 md:order-2 '>
-        <Button className='w-12 h-10  sm:inline' color='gray' pill>
-          <FaMoon /> 
-        </Button>
         {/* dynamic signin based on user status */}
         {currentUser ? (
           <Dropdown
