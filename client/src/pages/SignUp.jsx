@@ -2,8 +2,10 @@ import { Button, Label, TextInput, Alert, Spinner } from 'flowbite-react'
 import React from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { set } from 'mongoose'
 import OAuth from '../components/Oauth'
+import { signUpStart,signUpSuccess} from '../redux/user/userSlice'
 
 
 function SignUp() {
@@ -13,6 +15,7 @@ function SignUp() {
   const [errorMessage, setErrorMessage] = useState(null)
   const [loading, setLoading] = useState(false)
   const navigate=useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     //...formData is a spread operator that copies the existing formData
@@ -27,6 +30,7 @@ function SignUp() {
   
     
     try{
+      dispatch(signUpStart());
       setLoading(true);
       
 
@@ -44,7 +48,8 @@ function SignUp() {
       }
       setLoading(false);
       if(res.ok){
-        navigate('/sign-in')
+        dispatch(signUpSuccess(data));
+        navigate('/')
       }
     }
     catch(err){

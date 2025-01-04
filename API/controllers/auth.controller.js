@@ -21,7 +21,16 @@ export const signup= async (req, res,next) => {
   
 try {
   await newUser.save(); //await used to wait for Promise returned by save() to resolve before continuing with  next line of code(only used with async function)
-  res.json({message: "Signup successful"});
+  //res.json({message: "Signup successful"});
+  const validUser= await User.findOne({email});
+  const validPassword= bcryptjs.compareSync(password, validUser.password);
+    if(!validPassword){
+      return next(errorHandler(400,"Invalid password"));
+    }
+  const token = jwt.sign( { id: validUser._id, isAdmin: validUser.isAdmin }, process.env.JWT_SECRET );
+  const {password: pass, ...rest}=validUser._doc;
+  res.status(200).cookie('access_token', token, {
+      httpOnly: true}).json(rest);
 }catch(error){
   //return res.status(400).json({message: error.message});
   next(error); //to pass the error to the global error handling middleware

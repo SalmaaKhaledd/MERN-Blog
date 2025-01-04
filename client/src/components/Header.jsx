@@ -115,6 +115,12 @@ function Header() {
            Profile
             </NavLink>
           </Navbar.Link>
+          {currentUser?.isAdmin && (
+          <Navbar.Link  as={'div'}> 
+            <NavLink to='/dashboard?tab=posts' className='active'> 
+           Posts
+            </NavLink>
+          </Navbar.Link>)}
           </Navbar.Collapse>
         </Navbar>
   )

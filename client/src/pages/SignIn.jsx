@@ -4,10 +4,10 @@ import { Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 //to use redux actions in a functional component we use the useDispatch hook
 import { useDispatch, useSelector } from 'react-redux'
-import { signInStart, signInSucces, signInFailure } from '../redux/user/userSlice'
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
 import { set } from 'mongoose'
 
-import OAuth from '../components/OAuth'
+import OAuth from '../components/OAuth.jsx'
 
 
 function SignIn() {
@@ -55,7 +55,7 @@ function SignIn() {
       }
       //setLoading(false);
       if(res.ok){
-        dispatch(signInSucces(data));
+        dispatch(signInSuccess(data));
         navigate('/')
       }
     }
