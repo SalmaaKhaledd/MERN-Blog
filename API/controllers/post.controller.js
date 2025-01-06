@@ -30,7 +30,7 @@ export const getposts = async (req, res, next) => {
     //based on the query parameters, set the default values 
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
-    const sortDirection = req.query.order === 'asc' ? 1 : -1;
+    const sortDirection = req.query.sort === 'asc' ? 1 : -1;
 
     //use post model to query the database
     const posts = await Post.find({

@@ -5,7 +5,7 @@ import PostCard from '../components/PostCard';
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
-    order: 'desc',
+    sort: 'desc',
     category: 'uncategorized',
   });
   console.log(sidebarData);
